@@ -126,7 +126,7 @@ export default function MainPage() {
             <div
               className={`${
                 showCustomSentenceList ? "hidden" : "flex"
-              } h-[15] bg-gray-300`}
+              } h-[15%] bg-gray-300`}
             >
               <div
                 onClick={() => handleButtonPress("limpar")}
