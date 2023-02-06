@@ -124,7 +124,7 @@ export default function MainPage() {
                   })}
                 </div>
 
-                <div className="grid grid-cols-7 w-[100%] m-auto h-[33.333%] md:w-[90%]">
+                <div className="grid grid-cols-7 w-[100%] m-auto h-[33.333%] md:w-[80%]">
                   {keysAlphabetical[2].map((key) => {
                     return (
                       <Button
