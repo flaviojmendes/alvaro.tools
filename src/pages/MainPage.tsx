@@ -15,33 +15,7 @@ export default function MainPage() {
   const [customSentences, setCustomSentences, removeCustomSentences] =
     useLocalStorage("customSentences", [] as string[]);
 
-  const keysAlphabetical = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
+  const keysNumbers = [
     "0",
     "1",
     "2",
@@ -51,6 +25,12 @@ export default function MainPage() {
     "7",
     "8",
     "9", 
+  ]
+
+  const keysAlphabetical = [
+    [ "q", "w", "e", "r", "t", "y", "u", "i", "o", "p" ],
+    [ "a", "s", "d", "f", "g", "h", "j", "k", "l" ],
+    [ "z", "x", "c", "v", "b", "n", "m" ]
   ];
 
   function handleButtonPress(key: string) {
@@ -106,20 +86,55 @@ export default function MainPage() {
 
             {/* Characters */}
             <div
-              className={`h-[70%] flex-wrap bg-gray-300 ${
+              className={`h-[70%] flex flex-col bg-gray-300 ${
                 showCustomSentenceList ? "hidden" : "flex"
               }`}
             >
-              {keysAlphabetical.map((key) => {
-                return (
-                  <Button
-                    handleButtonPress={handleButtonPress}
-                    char={key}
-                    width={"1/5"}
-                  />
-                );
-              })}
-              
+              <div className="flex h-[20%]">
+                {keysNumbers.map((key) => {
+                  return (
+                    <Button
+                      handleButtonPress={handleButtonPress}
+                      char={key}
+                    />
+                  );
+                })}
+              </div>
+
+              <div className="flex-1">
+                <div className="grid grid-cols-10 h-[33.333%]">
+                  {keysAlphabetical[0].map((key) => {
+                    return (
+                      <Button
+                        handleButtonPress={handleButtonPress}
+                        char={key}
+                      />
+                    );
+                  })}
+                </div>
+
+                <div className="grid grid-cols-9 w-[100%] m-auto h-[33.333%] md:w-[90%]">
+                  {keysAlphabetical[1].map((key) => {
+                    return (
+                      <Button
+                        handleButtonPress={handleButtonPress}
+                        char={key}
+                      />
+                    );
+                  })}
+                </div>
+
+                <div className="grid grid-cols-7 w-[100%] m-auto h-[33.333%] md:w-[90%]">
+                  {keysAlphabetical[2].map((key) => {
+                    return (
+                      <Button
+                        handleButtonPress={handleButtonPress}
+                        char={key}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
             {/* Controls */}
