@@ -1597,6 +1597,11 @@ color2k@^2.0.0:
   resolved "https://registry.yarnpkg.com/color2k/-/color2k-2.0.0.tgz#86992c82e248c29f524023ed0822bc152c4fa670"
   integrity sha512-DWX9eXOC4fbJNiuvdH4QSHvvfLWyFo9TuFp7V9OzdsbPAdrWAuYc8qvFP2bIQ/LKh4LrAVnJ6vhiQYPvAHdtTg==
 
+compress-json@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/compress-json/-/compress-json-2.1.2.tgz#37e0e7c7480c572fad9ad387fca5a2f36fee6f83"
+  integrity sha512-91247RD8bKQXzRmXUS4zGT250mhw86+J9X8w2L2SGtRE7g0CvzjOETFaFmsDdaXPWv8T7L9iiM7kdcnnH3BH7w==
+
 compute-scroll-into-view@1.0.14:
   version "1.0.14"
   resolved "https://registry.yarnpkg.com/compute-scroll-into-view/-/compute-scroll-into-view-1.0.14.tgz#80e3ebb25d6aa89f42e533956cb4b16a04cfe759"
@@ -2001,6 +2006,11 @@ js-cookie@^2.2.1:
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
   integrity sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==
 
+js-string-compression@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/js-string-compression/-/js-string-compression-1.0.1.tgz#8b68e630cb9054c556f78f825f73900ecd166c67"
+  integrity sha512-+LDiOtUIbsmsDjSfGZFbO4E1ujl+a8/9IrrQNekWKdD2hPd4zMTHkf2UAd03BHzi/3y+B1fU8QDJVEPmSiNDJw==
+
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -2063,6 +2073,11 @@ lru-cache@^5.1.1:
   integrity sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
   dependencies:
     yallist "^3.0.2"
+
+lz-string@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/lz-string/-/lz-string-1.5.0.tgz#c1ab50f77887b712621201ba9fd4e3a6ed099941"
+  integrity sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==
 
 magic-string@^0.27.0:
   version "0.27.0"

@@ -1,11 +1,13 @@
 import { Textarea } from "@chakra-ui/react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useFullScreenHandle, FullScreen } from "react-full-screen";
 import { FaBackspace, FaList, FaTrash, FaWindowClose } from "react-icons/fa";
 import { GiNothingToSay } from "react-icons/gi";
 import { useLocalStorage } from "react-use";
 import Button from "../components/Button";
 import { words } from "../assets/words";
+
+import { compress, decompress } from "lz-string";
 
 export default function MainPage() {
   const [text, setText] = useState("");
@@ -18,6 +20,18 @@ export default function MainPage() {
 
   const [customSentences, setCustomSentences, removeCustomSentences] =
     useLocalStorage("customSentences", [] as string[]);
+
+  const [wordsList, setWordsList, removeWordsList] = useLocalStorage(
+    "wordsList",
+    {} as {[id: string] : number}
+  );
+
+  useEffect(() => {
+    
+    if(!wordsList || Object.keys(wordsList).length === 0) {
+      setWordsList(words);
+    }
+  }, []);
 
   const keysAlphabetical = [
     "a",
@@ -78,15 +92,28 @@ export default function MainPage() {
   }
 
   function handleGuessedWord(word: string) {
+
     const lastWord = text.split(" ").pop();
     const lastIndex = text.lastIndexOf(lastWord || "");
+    let newWordsList = wordsList || {};
+    newWordsList[word] = newWordsList[word] + 1;
 
-    setText(text.slice(0, lastIndex) + word + " ");;  
+    const sortedArray = Object.entries(newWordsList).sort((a, b) => b[1] - a[1]);
+
+    const sortedJsonObj = sortedArray.reduce((acc: any, [key, value]) => {
+      acc[key] = value;
+      return acc;
+    }, {});
+
+    setWordsList(sortedJsonObj)
+    setText(text.slice(0, lastIndex) + word + " ");
   }
 
   function suggestWord(text: string) {
-    const filteredWords = words.filter((word) => word.word.startsWith(text));
-    setGuessedWords(filteredWords.slice(0, 3).map((word) => word.word));
+  
+    const filteredWords = Object.keys(wordsList || []).filter((word: string) => word.startsWith(text));
+
+    setGuessedWords(filteredWords.slice(0, 3).map((word: any) => word));
   }
 
   function handlePlayTTS() {
