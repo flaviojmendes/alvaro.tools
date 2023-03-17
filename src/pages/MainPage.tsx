@@ -5,6 +5,7 @@ import { FaBackspace, FaList, FaTrash, FaWindowClose } from "react-icons/fa";
 import { GiNothingToSay } from "react-icons/gi";
 import { useLocalStorage } from "react-use";
 import Button from "../components/Button";
+import { words } from "../assets/words";
 
 export default function MainPage() {
   const [text, setText] = useState("");
@@ -12,6 +13,9 @@ export default function MainPage() {
   const [isFullScreen, setFullscreen] = useState(false);
   const [showCustomSentenceList, setShowCustomSentenceList] = useState(false);
   const handle = useFullScreenHandle();
+
+  const [guessedWords, setGuessedWords] = useState([] as string[]);
+
   const [customSentences, setCustomSentences, removeCustomSentences] =
     useLocalStorage("customSentences", [] as string[]);
 
@@ -50,7 +54,7 @@ export default function MainPage() {
     "6",
     "7",
     "8",
-    "9", 
+    "9",
   ];
 
   function handleButtonPress(key: string) {
@@ -68,6 +72,21 @@ export default function MainPage() {
     }
 
     setText(text + key);
+
+    const word = (text + key).split(" ").pop();
+    if (word) suggestWord(word);
+  }
+
+  function handleGuessedWord(word: string) {
+    const lastWord = text.split(" ").pop();
+    const lastIndex = text.lastIndexOf(lastWord || "");
+
+    setText(text.slice(0, lastIndex) + word + " ");;  
+  }
+
+  function suggestWord(text: string) {
+    const filteredWords = words.filter((word) => word.word.startsWith(text));
+    setGuessedWords(filteredWords.slice(0, 3).map((word) => word.word));
   }
 
   function handlePlayTTS() {
@@ -104,9 +123,26 @@ export default function MainPage() {
               />
             </div>
 
+            {/* Guesses */}
+            <div
+              className={`h-[10%] flex w-full bg-blue-300 ${
+                showCustomSentenceList ? "hidden" : "flex"
+              }`}
+            >
+              {guessedWords.map((guessedWord) => {
+                return (
+                  <Button
+                    handleButtonPress={handleGuessedWord}
+                    char={guessedWord}
+                    width={"w-1/3"}
+                  />
+                );
+              })}
+            </div>
+
             {/* Characters */}
             <div
-              className={`h-[70%] flex-wrap bg-gray-300 ${
+              className={`h-[60%] flex-wrap bg-gray-300 ${
                 showCustomSentenceList ? "hidden" : "flex"
               }`}
             >
@@ -115,11 +151,10 @@ export default function MainPage() {
                   <Button
                     handleButtonPress={handleButtonPress}
                     char={key}
-                    width={"1/5"}
+                    width={"w-1/5"}
                   />
                 );
               })}
-              
             </div>
 
             {/* Controls */}
