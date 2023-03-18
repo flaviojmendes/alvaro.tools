@@ -27,7 +27,7 @@ export default function MainPage() {
   );
 
   useEffect(() => {
-    
+
     if(!wordsList || Object.keys(wordsList).length === 0) {
       setWordsList(words);
     }
@@ -120,6 +120,7 @@ export default function MainPage() {
     var msg = new SpeechSynthesisUtterance();
     msg.lang = "pt-BR";
     msg.text = text;
+    msg.rate = 1;
     window.speechSynthesis.speak(msg);
   }
 
@@ -152,7 +153,7 @@ export default function MainPage() {
 
             {/* Guesses */}
             <div
-              className={`h-[10%] flex w-full bg-blue-300 ${
+              className={`h-[10%] flex w-full bg-white ${
                 showCustomSentenceList ? "hidden" : "flex"
               }`}
             >
@@ -192,31 +193,31 @@ export default function MainPage() {
             >
               <div
                 onClick={() => handleButtonPress("limpar")}
-                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl border-gray-700 hover:bg-red-200 active:bg-red-500"
+                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl rounded-sm hover:bg-red-200 active:bg-red-500"
               >
                 <FaTrash size={"40%"} className="m-auto" />
               </div>
               <div
                 onClick={() => setShowCustomSentenceList(true)}
-                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl border-gray-700 hover:bg-blue-200 active:bg-blue-500"
+                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl rounded-sm hover:bg-blue-200 active:bg-blue-500"
               >
                 <FaList size={"40%"} className="m-auto" />
               </div>
               <div
                 onClick={() => handleButtonPress("espaço")}
-                className="w-2/4 cursor-pointer flex border-2 font-semibold text-2xl border-gray-700 hover:bg-gray-100 active:bg-gray-400"
+                className="w-2/4 cursor-pointer flex border-2 font-semibold text-2xl rounded-sm hover:bg-gray-100 active:bg-gray-400"
               >
                 <span className="m-auto select-none">{"espaço"}</span>
               </div>
               <div
                 onClick={() => handleButtonPress("apagar")}
-                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl border-gray-700 hover:bg-gray-100 active:bg-gray-400"
+                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl rounded-sm hover:bg-gray-100 active:bg-gray-400"
               >
                 <FaBackspace size={"40%"} className="m-auto" />
               </div>
               <div
                 onClick={() => handlePlayTTS()}
-                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl border-gray-700 hover:bg-green-200 active:bg-green-500"
+                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl rounded-sm hover:bg-green-200 active:bg-green-500"
               >
                 <GiNothingToSay size={"50%"} className="m-auto" />
               </div>

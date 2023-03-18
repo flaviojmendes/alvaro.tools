@@ -11,7 +11,7 @@ def loadList():
         
         
         for line in lines:
-            line = line.replace("\n", "") 
+            line = line.split(" ").pop().replace("\n", "") 
             if not line.endswith("ai") and not line.endswith("areis") and not line.endswith("arias") and not line.endswith("areis") and not line.endswith("arei") and not line.endswith("asseis") and not line.endswith("ieis")  and not line.endswith("rias")  and not line.endswith("eavas")  and not line.endswith("astes"):
                 words[line] = 0
                 
