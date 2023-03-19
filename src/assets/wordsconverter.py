@@ -11,9 +11,10 @@ def loadList():
         
         
         for line in lines:
-            line = line.split(" ").pop().replace("\n", "") 
+            word = line.split(" ").pop().replace("\n", "") 
+            points = line.split(" ").pop(1).replace("\n", "") 
             if not line.endswith("ai") and not line.endswith("areis") and not line.endswith("arias") and not line.endswith("areis") and not line.endswith("arei") and not line.endswith("asseis") and not line.endswith("ieis")  and not line.endswith("rias")  and not line.endswith("eavas")  and not line.endswith("astes"):
-                words[line] = 0
+                words[word] = round(float(points))
                 
             
     with codecs.open("words.json", "w", "utf-8") as temp:

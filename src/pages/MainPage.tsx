@@ -16,18 +16,27 @@ export default function MainPage() {
   const [showCustomSentenceList, setShowCustomSentenceList] = useState(false);
   const handle = useFullScreenHandle();
 
+  const [suggestionEnabled, setSuggestionEnabled, removeSuggestionEnabled] =
+    useLocalStorage("suggestionEnabled", false);
+
   const [guessedWords, setGuessedWords] = useState([] as string[]);
 
   const [customSentences, setCustomSentences, removeCustomSentences] =
     useLocalStorage("customSentences", [] as string[]);
 
   const [wordsList, setWordsList, removeWordsList] = useLocalStorage(
+    "words",
+    {} as {[id: string] : number}
+  );
+
+  
+  const [wordsListLegacy, setWordsListLegacy, removeWordsListLegacy] = useLocalStorage(
     "wordsList",
     {} as {[id: string] : number}
   );
 
   useEffect(() => {
-
+    removeWordsListLegacy();
     if(!wordsList || Object.keys(wordsList).length === 0) {
       setWordsList(words);
     }
@@ -152,6 +161,7 @@ export default function MainPage() {
             </div>
 
             {/* Guesses */}
+            {suggestionEnabled && (
             <div
               className={`h-[10%] flex w-full bg-white ${
                 showCustomSentenceList ? "hidden" : "flex"
@@ -167,10 +177,10 @@ export default function MainPage() {
                 );
               })}
             </div>
-
+            )}
             {/* Characters */}
             <div
-              className={`h-[60%] flex-wrap bg-gray-300 ${
+              className={`${suggestionEnabled ? 'h-[60%]' : 'h-[70%]'} flex-wrap bg-gray-300 ${
                 showCustomSentenceList ? "hidden" : "flex"
               }`}
             >
@@ -193,7 +203,7 @@ export default function MainPage() {
             >
               <div
                 onClick={() => handleButtonPress("limpar")}
-                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl rounded-sm hover:bg-red-200 active:bg-red-500"
+                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl rounded-sm hover:bg-red-200 active:bg-accent-light"
               >
                 <FaTrash size={"40%"} className="m-auto" />
               </div>
@@ -217,7 +227,7 @@ export default function MainPage() {
               </div>
               <div
                 onClick={() => handlePlayTTS()}
-                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl rounded-sm hover:bg-green-200 active:bg-green-500"
+                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl rounded-sm hover:bg-accent-secondary active:bg-accent-secondary"
               >
                 <GiNothingToSay size={"50%"} className="m-auto" />
               </div>
@@ -249,7 +259,7 @@ export default function MainPage() {
             >
               <div
                 onClick={() => handleButtonPress("limpar")}
-                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl border-gray-700 hover:bg-red-200 active:bg-red-500"
+                className="w-1/4 cursor-pointer flex border-2 font-semibold text-2xl border-gray-700 hover:bg-red-200 active:bg-accent-light"
               >
                 <FaTrash size={"40%"} className="m-auto" />
               </div>
@@ -268,7 +278,7 @@ export default function MainPage() {
 
               <div
                 onClick={() => handlePlayTTS()}
-                className="w-2/4 cursor-pointer flex border-2 font-semibold text-2xl border-gray-700 hover:bg-green-200 active:bg-green-500"
+                className="w-2/4 cursor-pointer flex border-2 font-semibold text-2xl border-gray-700 hover:bg-accent-secondary active:bg-accent-secondary"
               >
                 <GiNothingToSay size={"50%"} className="m-auto" />
               </div>
